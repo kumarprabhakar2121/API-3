@@ -24,12 +24,12 @@ const Form = () => {
             ]);
 
             setResult({
-                age: ageResponse.data.age,
-                gender: genderResponse.data.gender,
-                country: countryResponse.data.country[0]?.country_id || 'Unknown',
+                age: ageResponse?.data?.age || 'UNKNOWN',
+                gender: genderResponse?.data?.gender?.toUpperCase() || 'UNKNOWN',
+                country: countryResponse?.data?.country[0]?.country_id || 'UNKNOWN',
             });
         } catch (error) {
-            setError(`Failed to fetch data : ${error.response.data.error}`);
+            setError(`Failed to fetch data : ${error?.response?.data?.error}`);
         } finally {
             setLoading(false);
         }
@@ -66,7 +66,7 @@ const Form = () => {
             {result && (
                 <div className="mt-8 p-6 bg-white rounded-lg shadow-xl w-full max-w-md text-gray-800">
                     <p className="text-xl font-semibold"><strong>Age:</strong> {result.age}</p>
-                    <p className="text-xl font-semibold"><strong>Gender:</strong> {result.gender.toUpperCase()}</p>
+                    <p className="text-xl font-semibold"><strong>Gender:</strong> {result.gender}</p>
                     <p className="text-xl font-semibold"><strong>Country:</strong> {result.country}</p>
                 </div>
             )}
